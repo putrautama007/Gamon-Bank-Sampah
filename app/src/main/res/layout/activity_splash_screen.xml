@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="@color/white_grey"
+    tools:context=".activity.SplashScreenActivity">
+
+
+
+    <ImageView
+        android:id="@+id/iv-logo"
+        android:layout_width="256dp"
+        android:layout_height="256dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="106dp"
+        android:src="@drawable/gamon_banksampah_logo" />
+
+
+</RelativeLayout>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".feature.transaksi.TransaksiFragment">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@android:color/white"
+        android:background="?attr/colorPrimary">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:text="@string/transaksi"
+            android:textColor="@android:color/white"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:layout_gravity="center"
+            />
+
+    </android.support.v7.widget.Toolbar>
+
+   <RelativeLayout
+       android:id="@+id/cv_stor_sampah"
+       android:layout_below="@+id/toolbar"
+       android:layout_marginTop="150dp"
+       android:layout_alignParentStart="true"
+       android:layout_alignParentEnd="true"
+       android:layout_marginBottom="20dp"
+       android:layout_marginStart="20dp"
+       android:layout_marginEnd="20dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+       <LinearLayout
+           android:weightSum="2"
+           android:background="@drawable/button_gradient_transaksi"
+           android:orientation="horizontal"
+           android:paddingBottom="10dp"
+           android:paddingTop="10dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+           <ImageView
+               android:layout_weight="1"
+               android:src="@drawable/setor"
+               android:layout_width="64dp"
+               android:layout_height="64dp" />
+
+           <TextView
+               android:layout_weight="1"
+               android:textAlignment="center"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textSize="24sp"
+               android:layout_gravity="center_vertical"
+               android:fontFamily="sans-serif"
+               android:textStyle="normal"
+               android:textColor="@android:color/black"
+               android:lineSpacingExtra="2.7sp"
+               android:text="@string/setor_sampah"
+               />
+
+       </LinearLayout>
+
+   </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/cv_tabung"
+        android:layout_below="@+id/cv_stor_sampah"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:weightSum="2"
+            android:background="@drawable/button_gradient_transaksi"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_weight="1"
+                android:src="@drawable/nabung"
+                android:layout_width="64dp"
+                android:layout_height="64dp" />
+
+            <TextView
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@android:color/black"
+                android:lineSpacingExtra="2.7sp"
+                android:text="@string/tarik_uang_saldo"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

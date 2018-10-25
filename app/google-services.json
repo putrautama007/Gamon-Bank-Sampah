@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "964710934206",
+    "firebase_url": "https://gamon2-212114.firebaseio.com",
+    "project_id": "gamon2-212114",
+    "storage_bucket": "gamon2-212114.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:964710934206:android:b95c7de6dec330d2",
+        "android_client_info": {
+          "package_name": "com.pau.putrautama.gamonbanksampah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "964710934206-9mknn32pt2m1fe35l5mp4p3oq393p6t9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk5oo_WSdshtSckstA0i_FWRSn-kFC7q8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
