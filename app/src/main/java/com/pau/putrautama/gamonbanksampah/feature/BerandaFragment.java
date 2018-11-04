@@ -13,9 +13,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.pau.putrautama.gamonbanksampah.R;
 
 /**
@@ -26,6 +30,12 @@ public class BerandaFragment extends Fragment {
     EditText mHargaKertas, mHargaBotol;
     CheckBox mCbKertas, mCbBotol;
     Button mBtnSave;
+
+    private FirebaseAuth mAuth;
+    private DatabaseReference mFirebaseDatabaseUserBankSampah,mFirebaseDatabaseBankSampah;
+    private FirebaseDatabase mFirebaseUserBankInstance, mFirebaseBankSampahInstance ;
+    String userId;
+    boolean isMenerimaKertas, isMenerimaBotol;
 
     public BerandaFragment() {
         // Required empty public constructor
@@ -49,10 +59,33 @@ public class BerandaFragment extends Fragment {
         mCbBotol = view.findViewById(R.id.cb_botol);
         mBtnSave = view.findViewById(R.id.btn_save_sampah);
 
+        mAuth = FirebaseAuth.getInstance();
+
         mBtnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 customAllertDialog();
+            }
+        });
+
+        mCbBotol.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    isMenerimaBotol = true;
+                }else {
+                    isMenerimaBotol = false;
+                }
+            }
+        });
+        mCbKertas.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    isMenerimaKertas = true;
+                }else {
+                    isMenerimaKertas = false;
+                }
             }
         });
     }
@@ -62,12 +95,9 @@ public class BerandaFragment extends Fragment {
         dialog.setContentView(R.layout.save_jenis_sampah_dailog);
         dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
 
+        updateData();
+
         TextView close = dialog.findViewById(R.id.tv_close);
-
-
-
-
-
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +106,30 @@ public class BerandaFragment extends Fragment {
             }
         });
         dialog.show();
+    }
+
+    private void updateData(){
+        String hargaKertas = mHargaKertas.getText().toString();
+        String hargaBotol = mHargaBotol.getText().toString();
+
+        mFirebaseUserBankInstance = FirebaseDatabase.getInstance();
+        mFirebaseBankSampahInstance = FirebaseDatabase.getInstance();
+
+
+        mFirebaseDatabaseBankSampah = mFirebaseBankSampahInstance.getReference("banksampah");
+        mFirebaseDatabaseUserBankSampah = mFirebaseUserBankInstance.getReference("userbanksampah");
+
+        userId = mAuth.getUid();
+        mFirebaseDatabaseUserBankSampah.child(userId).child("hargaSampahKertas").setValue(hargaKertas);
+        mFirebaseDatabaseUserBankSampah.child(userId).child("menerimaSampahKertas").setValue(isMenerimaKertas);
+        mFirebaseDatabaseUserBankSampah.child(userId).child("hargaSampahPlastik").setValue(hargaBotol);
+        mFirebaseDatabaseUserBankSampah.child(userId).child("menerimaSampahPlastik").setValue(isMenerimaBotol);
+
+        mFirebaseDatabaseUserBankSampah.child(userId).child("hargaSampahKertas").setValue(hargaKertas);
+        mFirebaseDatabaseUserBankSampah.child(userId).child("menerimaSampahKertas").setValue(isMenerimaKertas);
+        mFirebaseDatabaseUserBankSampah.child(userId).child("hargaSampahPlastik").setValue(hargaBotol);
+        mFirebaseDatabaseUserBankSampah.child(userId).child("menerimaSampahPlastik").setValue(isMenerimaBotol);
+
     }
 }
 
