@@ -28,6 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.pau.putrautama.gamonbanksampah.R;
+import com.pau.putrautama.gamonbanksampah.model.BankSampah;
 import com.pau.putrautama.gamonbanksampah.model.UserBankSampah;
 
 public class SetupBankSampahActivity extends AppCompatActivity {
@@ -43,6 +44,7 @@ public class SetupBankSampahActivity extends AppCompatActivity {
     Double latitude,longitude;
 
     UserBankSampah userBankSampah;
+    BankSampah bankSampah;
     String alamatBank,email,password,namaBank,noHp;
     boolean isMenerimaKertas, isMenerimaBotol;
     Uri uriProfileImage;
@@ -193,7 +195,11 @@ public class SetupBankSampahActivity extends AppCompatActivity {
         userBankSampah = new UserBankSampah(namaBank,email,password,noHp,alamatBank,bankLocation,isMenerimaKertas,
                 isMenerimaBotol,"0","0");
 
+        bankSampah = new BankSampah(namaBank,email,noHp,alamatBank,bankLocation,
+                isMenerimaKertas,isMenerimaBotol,"0","0");
+
         mFirebaseDatabaseUserBankSampah.child(userId).setValue(userBankSampah);
+        mFirebaseDatabaseBankSampah.child(userId).setValue(bankSampah);
 
     }
 
