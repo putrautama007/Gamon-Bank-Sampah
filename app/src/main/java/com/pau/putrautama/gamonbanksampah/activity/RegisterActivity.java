@@ -17,7 +17,7 @@ import com.pau.putrautama.gamonbanksampah.R;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText mNamaLengkap, mEmail, mPassword, mNohp;
+    EditText mNamaBank, mEmail, mPassword, mNohp;
     LinearLayout mHaveAccount;
     Button mBtnDaftar;
     ProgressBar progressBar;
@@ -26,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        mNamaLengkap = findViewById(R.id.et_name_register);
+        mNamaBank = findViewById(R.id.et_name_register);
         mEmail = findViewById(R.id.et_email_register);
         mPassword = findViewById(R.id.et_password_register);
         mNohp = findViewById(R.id.et_nohp_register);
@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void registerAccount() {
-        String namaLengkap = mNamaLengkap.getText().toString().trim();
+        String namaBank = mNamaBank.getText().toString().trim();
         String email = mEmail.getText().toString().trim();
         String password = mPassword.getText().toString().trim();
         String noHp = mNohp.getText().toString().trim();
@@ -72,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), R.string.masukan_nohp, Toast.LENGTH_LONG).show();
             return;
         }
-        if (TextUtils.isEmpty(namaLengkap)) {
+        if (TextUtils.isEmpty(namaBank)) {
             Toast.makeText(getApplicationContext(), R.string.masukan_nama_lengkap, Toast.LENGTH_LONG).show();
             return;
         }
@@ -83,6 +83,8 @@ public class RegisterActivity extends AppCompatActivity {
         Intent intent = new Intent(RegisterActivity.this, SetupBankSampahActivity.class);
         intent.putExtra("email",email);
         intent.putExtra("password",password);
+        intent.putExtra("nohp",noHp);
+        intent.putExtra("nama_bank",namaBank);
         startActivity(intent);
         Toast.makeText(getApplicationContext(), R.string.berhasil_daftar, Toast.LENGTH_SHORT).show();
 

@@ -39,6 +39,11 @@ public class LoginActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.login_progressbar);
 
         mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() != null) {
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
 
         mBtnMasuk.setOnClickListener(new View.OnClickListener() {
             @Override

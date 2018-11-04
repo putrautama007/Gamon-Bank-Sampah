@@ -21,6 +21,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.firebase.auth.FirebaseAuth;
 import com.pau.putrautama.gamonbanksampah.feature.akun.detailAkun.EditAkunActivity;
 import com.pau.putrautama.gamonbanksampah.feature.akun.detailAkun.PasswordActivity;
 import com.pau.putrautama.gamonbanksampah.activity.LoginActivity;
@@ -38,6 +39,7 @@ public class AkunFragment extends Fragment {
 
     private static final int PLACE_PICKER_REQUEST = 1000;
     private GoogleApiClient mClient;
+    private FirebaseAuth mAuth;
 
     public AkunFragment() {
         // Required empty public constructor
@@ -61,6 +63,8 @@ public class AkunFragment extends Fragment {
         mCvSandi = view.findViewById(R.id.cv_password);
         mCvLokasi = view.findViewById(R.id.cv_lokasi);
         mCvLogout = view.findViewById(R.id.cv_logout);
+
+        mAuth = FirebaseAuth.getInstance();
 
         mClient = new GoogleApiClient
                 .Builder(getContext())
@@ -114,6 +118,7 @@ public class AkunFragment extends Fragment {
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mAuth.signOut();
                 Intent intent = new Intent(getContext(), LoginActivity.class);
                 startActivity(intent);
                 dialog.dismiss();
