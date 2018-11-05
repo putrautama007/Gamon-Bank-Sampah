@@ -1,7 +1,6 @@
 package com.pau.putrautama.gamonbanksampah.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,25 +32,23 @@ import com.pau.putrautama.gamonbanksampah.model.UserBankSampah;
 
 public class SetupBankSampahActivity extends AppCompatActivity {
 
-    private static final int CHOOSE_IMAGE = 101;
+
     TextView mTvAlamat, mNamaBank;
-    ImageView mLlAlamat, mImageBank;
+    ImageView mLlAlamat;
     Button mBtnDaftar;
     CheckBox mKertasCheck,mBotolCheck;
     ImageView mBack;
     ProgressBar progressBar;
-    String address, bankLocation, downloadImageUrl,userId;
-    Double latitude,longitude;
+    String address, bankLocation, namaBank,userId,
+            alamatBank,email,password, namaUserBank,noHp;
+    double latitudeMap, longitudeMap;
 
     UserBankSampah userBankSampah;
     BankSampah bankSampah;
-    String alamatBank,email,password,namaBank,noHp;
     boolean isMenerimaKertas, isMenerimaBotol;
-    Uri uriProfileImage;
     private FirebaseAuth mAuth;
     private DatabaseReference mFirebaseDatabaseUserBankSampah,mFirebaseDatabaseBankSampah;
     private FirebaseDatabase mFirebaseUserBankInstance, mFirebaseBankSampahInstance ;
-//    private StorageReference bankSampahFotoRef,filePath;
 
 
     private static final int PLACE_PICKER_REQUEST = 1000;
@@ -66,7 +63,6 @@ public class SetupBankSampahActivity extends AppCompatActivity {
         mNamaBank = findViewById(R.id.et_nama_bank);
         mBtnDaftar = findViewById(R.id.btn_daftarkan_bank_sampah);
         mBack = findViewById(R.id.back_register_bank);
-//        mImageBank = findViewById(R.id.foto_bank_sampah_setup);
         mKertasCheck = findViewById(R.id.cb_kertas_setup);
         mBotolCheck = findViewById(R.id.cb_botol_setup);
         progressBar = findViewById(R.id.setup_bank_progressbar);
@@ -125,25 +121,17 @@ public class SetupBankSampahActivity extends AppCompatActivity {
             }
         });
 
-//        mImageBank.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showImageChooser();
-//            }
-//        });
     }
 
     private void daftarkanBank(){
         email = getIntent().getStringExtra("email");
         password = getIntent().getStringExtra("password");
-        namaBank = getIntent().getStringExtra("nama_bank");
+        namaUserBank = getIntent().getStringExtra("nama_bank");
         noHp = getIntent().getStringExtra("nohp");
         namaBank = mNamaBank.getText().toString();
         alamatBank = mTvAlamat.getText().toString();
 
-        if (uriProfileImage == null){
-            Toast.makeText(this, "Harap masukan foto", Toast.LENGTH_SHORT).show();
-        }else {
+
             progressBar.setVisibility(View.VISIBLE);
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -151,9 +139,8 @@ public class SetupBankSampahActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             progressBar.setVisibility(View.GONE);
                             if (task.isSuccessful()) {
-//                                uploadFotoToStorage();
                                 saveDataToFirebase();
-                                Intent intent = new Intent(SetupBankSampahActivity.this, LoginActivity.class);
+                                Intent intent = new Intent(SetupBankSampahActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
                                 Log.d("Firebase", "signUpWithEmail:success");
@@ -165,43 +152,7 @@ public class SetupBankSampahActivity extends AppCompatActivity {
                         }
                     });
         }
-    }
 
-//    private void  uploadFotoToStorage(){
-//        bankSampahFotoRef = FirebaseStorage.getInstance().getReference();
-//        filePath = bankSampahFotoRef.child("images").child(System.currentTimeMillis()+".jpg");
-//        filePath.putFile(uriProfileImage).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-//                if (task.isSuccessful()){
-//                    downloadImageUrl = bankSampahFotoRef.getDownloadUrl().getResult().toString();
-//                    saveDataToFirebase();
-//                }
-//            }
-//        });
-//
-//    }
-
-
-    private void saveDataToFirebase() {
-
-        mFirebaseUserBankInstance = FirebaseDatabase.getInstance();
-        mFirebaseBankSampahInstance = FirebaseDatabase.getInstance();
-
-        mFirebaseDatabaseBankSampah = mFirebaseBankSampahInstance.getReference("banksampah");
-        mFirebaseDatabaseUserBankSampah = mFirebaseUserBankInstance.getReference("userbanksampah");
-
-        userId = mAuth.getUid();
-        userBankSampah = new UserBankSampah(namaBank,email,password,noHp,alamatBank,bankLocation,isMenerimaKertas,
-                isMenerimaBotol,"0","0");
-
-        bankSampah = new BankSampah(namaBank,email,noHp,alamatBank,bankLocation,
-                isMenerimaKertas,isMenerimaBotol,"0","0");
-
-        mFirebaseDatabaseUserBankSampah.child(userId).setValue(userBankSampah);
-        mFirebaseDatabaseBankSampah.child(userId).setValue(bankSampah);
-
-    }
 
 
     @Override
@@ -235,29 +186,34 @@ public class SetupBankSampahActivity extends AppCompatActivity {
                 Place place = PlacePicker.getPlace(data,this);
                 StringBuilder stBuilder = new StringBuilder();
                 address = String.format("%s", place.getAddress());
-                latitude = place.getLatLng().latitude;
-                longitude = place.getLatLng().longitude;
-                bankLocation =latitude.toString() + "," +longitude.toString();
+                latitudeMap = place.getLatLng().latitude;
+                longitudeMap = place.getLatLng().longitude;
                 stBuilder.append(address);
                 mTvAlamat.setText(stBuilder.toString());
             }
         }
-        if (requestCode == CHOOSE_IMAGE && resultCode == RESULT_OK
-                && data != null){
-
-            uriProfileImage = data.getData();
-            mImageBank.setImageURI(uriProfileImage);
-
-        }
     }
 
 
-//    private void showImageChooser(){
-//        Intent intent = new Intent();
-//        intent.setType("image/*");
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
-//        startActivityForResult(intent,CHOOSE_IMAGE);
-//    }
+    private void saveDataToFirebase() {
 
+        mFirebaseUserBankInstance = FirebaseDatabase.getInstance();
+        mFirebaseBankSampahInstance = FirebaseDatabase.getInstance();
+
+        mFirebaseDatabaseBankSampah = mFirebaseBankSampahInstance.getReference("banksampah");
+        mFirebaseDatabaseUserBankSampah = mFirebaseUserBankInstance.getReference("userbanksampah");
+
+        userId = mAuth.getUid();
+        userBankSampah = new UserBankSampah(namaUserBank,namaBank,email,password,noHp,alamatBank,
+                latitudeMap, longitudeMap,isMenerimaKertas,
+                isMenerimaBotol,0,0);
+
+        bankSampah = new BankSampah(namaUserBank,email,noHp,alamatBank, latitudeMap, longitudeMap,
+                isMenerimaKertas,isMenerimaBotol,0,0);
+
+        mFirebaseDatabaseUserBankSampah.child(userId).setValue(userBankSampah);
+        mFirebaseDatabaseBankSampah.child(userId).setValue(bankSampah);
+
+    }
 }
 

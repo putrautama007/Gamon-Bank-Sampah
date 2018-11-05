@@ -81,6 +81,7 @@ public class ScanTarikActivity extends AppCompatActivity {
                     Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
                     vibrator.vibrate(500);
                     Intent intent = new Intent(ScanTarikActivity.this,TarikActivity.class);
+                    intent.putExtra("user_id",qrCode.valueAt(0).displayValue);
                     startActivity(intent);
                 }
             }

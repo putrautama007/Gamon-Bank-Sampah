@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.pau.putrautama.gamonbanksampah.R;
 import com.pau.putrautama.gamonbanksampah.adapter.MenungguAdapter;
-import com.pau.putrautama.gamonbanksampah.model.UserList;
+import com.pau.putrautama.gamonbanksampah.model.UserListTerdaftar;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class MenungguFragment extends Fragment {
 
     private RecyclerView mRVMenunggu;
-    private ArrayList<UserList> userLists = new ArrayList<>();
+    private ArrayList<UserListTerdaftar> userListTerdaftars = new ArrayList<>();
     private MenungguAdapter adapter;
 
 
@@ -45,16 +45,16 @@ public class MenungguFragment extends Fragment {
 
         setUpData();
         mRVMenunggu = view.findViewById(R.id.rv_menunggu);
-        adapter = new MenungguAdapter(getContext(),userLists);
+        adapter = new MenungguAdapter(getContext(), userListTerdaftars);
         mRVMenunggu.setLayoutManager(new LinearLayoutManager(getContext()));
         mRVMenunggu.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 
     private void setUpData() {
-        userLists.add(new UserList("Anne John","19 Oktober 2018",
+        userListTerdaftars.add(new UserListTerdaftar("Anne John","19 Oktober 2018",
                 0,0,0));
-        userLists.add(new UserList("Anne Dean","18 Oktober 2018",
+        userListTerdaftars.add(new UserListTerdaftar("Anne Dean","18 Oktober 2018",
                 0,0,0));
     }
 }

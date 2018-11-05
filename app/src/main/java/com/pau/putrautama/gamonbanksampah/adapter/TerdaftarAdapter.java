@@ -10,18 +10,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.pau.putrautama.gamonbanksampah.R;
-import com.pau.putrautama.gamonbanksampah.model.UserList;
+import com.pau.putrautama.gamonbanksampah.model.UserListTerdaftar;
 
 import java.util.ArrayList;
 
 public class TerdaftarAdapter extends RecyclerView.Adapter<TerdaftarAdapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<UserList> userLists;
+    private ArrayList<UserListTerdaftar> userListTerdaftars;
 
-    public TerdaftarAdapter(Context context, ArrayList<UserList> userLists) {
+    public TerdaftarAdapter(Context context, ArrayList<UserListTerdaftar> userListTerdaftars) {
         this.context = context;
-        this.userLists = userLists;
+        this.userListTerdaftars = userListTerdaftars;
     }
 
     @NonNull
@@ -33,8 +33,8 @@ public class TerdaftarAdapter extends RecyclerView.Adapter<TerdaftarAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.namaUser.setText(userLists.get(0).getNamaUser());
-        holder.tglBergabung.setText(userLists.get(0).getTglBergabung());
+        holder.namaUser.setText(userListTerdaftars.get(0).getNamaUser());
+        holder.tglBergabung.setText(userListTerdaftars.get(0).getTglBergabung());
         holder.cvTerdaftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,7 +45,7 @@ public class TerdaftarAdapter extends RecyclerView.Adapter<TerdaftarAdapter.View
 
     @Override
     public int getItemCount() {
-        return userLists.size();
+        return userListTerdaftars.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -1,13 +1,13 @@
 package com.pau.putrautama.gamonbanksampah.model;
 
-public class UserList {
+public class UserListTerdaftar {
     private String namaUser;
     private String tglBergabung;
     private int totalKertas;
     private int totalBotol;
     private int totalSaldo;
 
-    public UserList(String namaUser, String tglBergabung, int totalKertas, int totalBotol, int totalSaldo) {
+    public UserListTerdaftar(String namaUser, String tglBergabung, int totalKertas, int totalBotol, int totalSaldo) {
         this.namaUser = namaUser;
         this.tglBergabung = tglBergabung;
         this.totalKertas = totalKertas;
@@ -15,7 +15,7 @@ public class UserList {
         this.totalSaldo = totalSaldo;
     }
 
-    public UserList() {
+    public UserListTerdaftar() {
     }
 
     public String getNamaUser() {

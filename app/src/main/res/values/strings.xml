@@ -73,4 +73,5 @@
     <string name="transaksi_langsung">Transaksi Langsung</string>
     <string name="tarik_saldo">Tarik Saldo</string>
     <string name="ambil_tabungan">Ambil Tabungan</string>
+    <string name="edit">EDIT</string>
 </resources>

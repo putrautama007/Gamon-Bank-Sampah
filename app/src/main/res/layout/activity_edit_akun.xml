@@ -60,7 +60,6 @@
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:inputType="textPersonName"
-        android:text="Sumber Jaya"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:textColor="@color/colorPrimaryDark"/>
@@ -90,7 +89,6 @@
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:inputType="textEmailAddress"
-        android:text="sj.banksampah@gmail.com"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:textColor="@color/colorPrimaryDark"/>
@@ -120,7 +118,6 @@
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:inputType="phone"
-        android:text="081234567898"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:textColor="@color/colorPrimaryDark"/>

@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.pau.putrautama.gamonbanksampah.R;
 import com.pau.putrautama.gamonbanksampah.adapter.HistoryAdapter;
-import com.pau.putrautama.gamonbanksampah.model.HistoryList;
+import com.pau.putrautama.gamonbanksampah.model.Tabung;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class NabungFragment extends Fragment {
 
     private RecyclerView mRVHistory;
-    private ArrayList<HistoryList> historyList = new ArrayList<>();
+    private ArrayList<Tabung> tabung = new ArrayList<>();
     private HistoryAdapter adapter;
 
 
@@ -43,18 +43,18 @@ public class NabungFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setUpData();
+//        setUpData();
         mRVHistory = view.findViewById(R.id.rv_tabung);
-        adapter = new HistoryAdapter(getContext(),historyList);
+        adapter = new HistoryAdapter(getContext(), tabung);
         mRVHistory.setLayoutManager(new LinearLayoutManager(getContext()));
         mRVHistory.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 
-    private void setUpData() {
-        historyList.add(new HistoryList("John Doe","Bank Sampah Sumber Jaya",38271,"21 Oktober 2018 | 14:32",
-                4,2,6000,5000,11000));
-        historyList.add(new HistoryList("John Doe","Bank Sampah Sumber Jaya",38271,"19 Oktober 2018 2018 | 10:32",
-                2,2,3000,2000,8000));
-    }
+//    private void setUpData() {
+//        tabung.add(new Tabung("John Doe","Bank Sampah Sumber Jaya",38271,"21 Oktober 2018 | 14:32",
+//                4,2,6000,5000,11000));
+//        tabung.add(new Tabung("John Doe","Bank Sampah Sumber Jaya",38271,"19 Oktober 2018 2018 | 10:32",
+//                2,2,3000,2000,8000));
+//    }
 }

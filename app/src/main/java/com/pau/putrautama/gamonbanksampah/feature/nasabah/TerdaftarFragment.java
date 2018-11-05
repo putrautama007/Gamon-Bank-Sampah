@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.pau.putrautama.gamonbanksampah.R;
 import com.pau.putrautama.gamonbanksampah.adapter.TerdaftarAdapter;
-import com.pau.putrautama.gamonbanksampah.model.UserList;
+import com.pau.putrautama.gamonbanksampah.model.UserListTerdaftar;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class TerdaftarFragment extends Fragment {
 
     private RecyclerView mRVTerdaftar;
-    private ArrayList<UserList> userLists = new ArrayList<>();
+    private ArrayList<UserListTerdaftar> userListTerdaftars = new ArrayList<>();
     private TerdaftarAdapter adapter;
 
 
@@ -45,16 +45,16 @@ public class TerdaftarFragment extends Fragment {
 
         setUpData();
         mRVTerdaftar = view.findViewById(R.id.rv_terdaftar);
-        adapter = new TerdaftarAdapter(getContext(),userLists);
+        adapter = new TerdaftarAdapter(getContext(), userListTerdaftars);
         mRVTerdaftar.setLayoutManager(new LinearLayoutManager(getContext()));
         mRVTerdaftar.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 
     private void setUpData() {
-        userLists.add(new UserList("John Doe","02 Agustus 2018",
+        userListTerdaftars.add(new UserListTerdaftar("John Doe","02 Agustus 2018",
                 6,4,19000));
-        userLists.add(new UserList("Amaris Ane","20 September 2018",
+        userListTerdaftars.add(new UserListTerdaftar("Amaris Ane","20 September 2018",
                 4,2,11000));
 
     }

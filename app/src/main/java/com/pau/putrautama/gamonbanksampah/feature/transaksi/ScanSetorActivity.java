@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -103,6 +104,7 @@ public class ScanSetorActivity extends AppCompatActivity {
                     Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
                     vibrator.vibrate(500);
                     Intent intent = new Intent(ScanSetorActivity.this,SetorActivity.class);
+                    intent.putExtra("user_id",qrCode.valueAt(0).displayValue);
                     startActivity(intent);
                 }
             }

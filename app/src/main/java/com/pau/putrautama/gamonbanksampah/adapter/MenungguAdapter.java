@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.pau.putrautama.gamonbanksampah.R;
-import com.pau.putrautama.gamonbanksampah.model.UserList;
+import com.pau.putrautama.gamonbanksampah.model.UserListTerdaftar;
 
 import java.util.ArrayList;
 
@@ -18,11 +18,11 @@ public class MenungguAdapter extends RecyclerView.Adapter<MenungguAdapter.ViewHo
 
 
     private Context context;
-    private ArrayList<UserList> userLists;
+    private ArrayList<UserListTerdaftar> userListTerdaftars;
 
-    public MenungguAdapter(Context context, ArrayList<UserList> userLists) {
+    public MenungguAdapter(Context context, ArrayList<UserListTerdaftar> userListTerdaftars) {
         this.context = context;
-        this.userLists = userLists;
+        this.userListTerdaftars = userListTerdaftars;
     }
 
     @NonNull
@@ -34,8 +34,8 @@ public class MenungguAdapter extends RecyclerView.Adapter<MenungguAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.namaUser.setText(userLists.get(position).getNamaUser());
-        holder.tglMendaftar.setText(userLists.get(position).getTglBergabung());
+        holder.namaUser.setText(userListTerdaftars.get(position).getNamaUser());
+        holder.tglMendaftar.setText(userListTerdaftars.get(position).getTglBergabung());
         holder.btnTerima.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +52,7 @@ public class MenungguAdapter extends RecyclerView.Adapter<MenungguAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return userLists.size();
+        return userListTerdaftars.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

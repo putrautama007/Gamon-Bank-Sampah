@@ -3,27 +3,32 @@ package com.pau.putrautama.gamonbanksampah.model;
 import java.io.Serializable;
 
 public class UserBankSampah implements Serializable {
+    private String namaUserBankSampah;
     private String namaBankSampah;
     private String bankSampahEmail;
     private String bankSampahPassword;
     private String bankSampahNoTlp;
     private String alamatBank;
-    private String locationBank;
+    private double latitude;
+    private double longitude;
     private boolean menerimaSampahKertas;
     private boolean menerimaSampahPlastik;
-    private String hargaSampahKertas;
-    private String hargaSampahPlastik;
+    private int hargaSampahKertas;
+    private int hargaSampahPlastik;
 
-    public UserBankSampah(String namaBankSampah, String bankSampahEmail, String bankSampahPassword,
-                          String bankSampahNoTlp, String alamatBank, String locationBank,
-                          boolean menerimaSampahKertas, boolean menerimaSampahPlastik,
-                          String hargaSampahKertas, String hargaSampahPlastik) {
+    public UserBankSampah(String namaUserBankSampah, String namaBankSampah, String bankSampahEmail,
+                          String bankSampahPassword, String bankSampahNoTlp, String alamatBank,
+                          double latitude, double longitude, boolean menerimaSampahKertas,
+                          boolean menerimaSampahPlastik, int hargaSampahKertas,
+                          int hargaSampahPlastik) {
+        this.namaUserBankSampah = namaUserBankSampah;
         this.namaBankSampah = namaBankSampah;
         this.bankSampahEmail = bankSampahEmail;
         this.bankSampahPassword = bankSampahPassword;
         this.bankSampahNoTlp = bankSampahNoTlp;
         this.alamatBank = alamatBank;
-        this.locationBank = locationBank;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.menerimaSampahKertas = menerimaSampahKertas;
         this.menerimaSampahPlastik = menerimaSampahPlastik;
         this.hargaSampahKertas = hargaSampahKertas;
@@ -31,6 +36,30 @@ public class UserBankSampah implements Serializable {
     }
 
     public UserBankSampah() {
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getNamaUserBankSampah() {
+        return namaUserBankSampah;
+    }
+
+    public void setNamaUserBankSampah(String namaUserBankSampah) {
+        this.namaUserBankSampah = namaUserBankSampah;
     }
 
     public String getBankSampahEmail() {
@@ -73,14 +102,6 @@ public class UserBankSampah implements Serializable {
         this.alamatBank = alamatBank;
     }
 
-    public String getLocationBank() {
-        return locationBank;
-    }
-
-    public void setLocationBank(String locationBank) {
-        this.locationBank = locationBank;
-    }
-
     public boolean isMenerimaSampahKertas() {
         return menerimaSampahKertas;
     }
@@ -97,19 +118,19 @@ public class UserBankSampah implements Serializable {
         this.menerimaSampahPlastik = menerimaSampahPlastik;
     }
 
-    public String getHargaSampahKertas() {
+    public int getHargaSampahKertas() {
         return hargaSampahKertas;
     }
 
-    public void setHargaSampahKertas(String hargaSampahKertas) {
+    public void setHargaSampahKertas(int hargaSampahKertas) {
         this.hargaSampahKertas = hargaSampahKertas;
     }
 
-    public String getHargaSampahPlastik() {
+    public int getHargaSampahPlastik() {
         return hargaSampahPlastik;
     }
 
-    public void setHargaSampahPlastik(String hargaSampahPlastik) {
+    public void setHargaSampahPlastik(int hargaSampahPlastik) {
         this.hargaSampahPlastik = hargaSampahPlastik;
     }
 

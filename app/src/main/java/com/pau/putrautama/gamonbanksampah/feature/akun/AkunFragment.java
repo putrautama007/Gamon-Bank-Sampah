@@ -22,10 +22,16 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.pau.putrautama.gamonbanksampah.feature.akun.detailAkun.EditAkunActivity;
 import com.pau.putrautama.gamonbanksampah.feature.akun.detailAkun.PasswordActivity;
 import com.pau.putrautama.gamonbanksampah.activity.LoginActivity;
 import com.pau.putrautama.gamonbanksampah.R;
+import com.pau.putrautama.gamonbanksampah.model.UserBankSampah;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -40,6 +46,9 @@ public class AkunFragment extends Fragment {
     private static final int PLACE_PICKER_REQUEST = 1000;
     private GoogleApiClient mClient;
     private FirebaseAuth mAuth;
+    private DatabaseReference mFirebaseDatabase;
+    private FirebaseDatabase mFirebaseInstance;
+    private String userId;
 
     public AkunFragment() {
         // Required empty public constructor
@@ -64,7 +73,12 @@ public class AkunFragment extends Fragment {
         mCvLokasi = view.findViewById(R.id.cv_lokasi);
         mCvLogout = view.findViewById(R.id.cv_logout);
 
+
         mAuth = FirebaseAuth.getInstance();
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseDatabase = mFirebaseInstance.getReference("userbanksampah");
+
+        retriveData();
 
         mClient = new GoogleApiClient
                 .Builder(getContext())
@@ -99,6 +113,24 @@ public class AkunFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 customAllertDialog();
+            }
+        });
+    }
+
+    private void retriveData(){
+        userId = mAuth.getUid();
+        mFirebaseDatabase.child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserBankSampah user = dataSnapshot.getValue(UserBankSampah.class);
+                mNamaLengkap.setText(user.getNamaBankSampah());
+                mEmail.setText(user.getBankSampahEmail());
+                mNoTlp.setText(user.getBankSampahNoTlp());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }

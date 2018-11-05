@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.pau.putrautama.gamonbanksampah.R;
-import com.pau.putrautama.gamonbanksampah.model.HistoryList;
+import com.pau.putrautama.gamonbanksampah.model.Tabung;
 
 public class HistoryDetailActivity extends AppCompatActivity {
     public static final String ITEM_HISTORY = "item_movie";
@@ -18,7 +18,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
 
     private ImageView mIcon;
     private Button mBtnBack;
-    private HistoryList mHistory;
+    private Tabung mHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +36,10 @@ public class HistoryDetailActivity extends AppCompatActivity {
         mIcon = findViewById(R.id.iv_detail_riwayat);
         mBtnBack = findViewById(R.id.btn_detail_back);
 
-        mHistory = (HistoryList) getIntent().getSerializableExtra(ITEM_HISTORY);
+        mHistory = (Tabung) getIntent().getSerializableExtra(ITEM_HISTORY);
         mNamaDetail.setText(mHistory.getNamaUser());
         mNamaBankDetail.setText(mHistory.getNamaBankSampah());
-        mTglDetail.setText(mHistory.getTgl());
+        mTglDetail.setText(mHistory.getTglTransaksi());
         String beratKertas = Integer.toString(mHistory.getBeratKertas());
         mBeratKertas.setText(beratKertas+getResources().getString(R.string.kilogram));
         String beratBotol = Integer.toString(mHistory.getBeratBotol());
@@ -48,7 +48,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
         mHargaKertas.setText(getResources().getString(R.string.rupiah)+hargaKertas);
         String hargaBotol = Integer.toString(mHistory.getHargaBotol());
         mHargaBotol.setText(getResources().getString(R.string.rupiah)+hargaBotol);
-        String totalHarga = Integer.toString(mHistory.getTotalHarga());
+        String totalHarga = Integer.toString(mHistory.getHargaTotal());
         mTotalHarga.setText(getResources().getString(R.string.rupiah)+totalHarga);
 
         if (mHistory.getBeratKertas() > 0 && mHistory.getBeratBotol() < 0 ){

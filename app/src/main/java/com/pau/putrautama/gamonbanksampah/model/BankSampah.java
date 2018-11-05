@@ -6,25 +6,46 @@ public class BankSampah {
     private String bankSampahEmail;
     private String bankSampahNoTlp;
     private String alamatBank;
-    private String locationBank;
+    private double latitude;
+    private double longitude;
     private boolean menerimaSampahKertas;
     private boolean menerimaSampahPlastik;
-    private String hargaSampahKertas;
-    private String hargaSampahPlastik;
+    private int hargaSampahKertas;
+    private int hargaSampahPlastik;
 
     public BankSampah(String namaBankSampah, String bankSampahEmail, String bankSampahNoTlp,
-                      String alamatBank, String locationBank, boolean menerimaSampahKertas,
-                      boolean menerimaSampahPlastik, String hargaSampahKertas,
-                      String hargaSampahPlastik) {
+                      String alamatBank, double latitude, double longitude,
+                      boolean menerimaSampahKertas, boolean menerimaSampahPlastik,
+                      int hargaSampahKertas, int hargaSampahPlastik) {
         this.namaBankSampah = namaBankSampah;
         this.bankSampahEmail = bankSampahEmail;
         this.bankSampahNoTlp = bankSampahNoTlp;
         this.alamatBank = alamatBank;
-        this.locationBank = locationBank;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.menerimaSampahKertas = menerimaSampahKertas;
         this.menerimaSampahPlastik = menerimaSampahPlastik;
         this.hargaSampahKertas = hargaSampahKertas;
         this.hargaSampahPlastik = hargaSampahPlastik;
+    }
+
+    public BankSampah() {
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public String getNamaBankSampah() {
@@ -59,14 +80,6 @@ public class BankSampah {
         this.alamatBank = alamatBank;
     }
 
-    public String getLocationBank() {
-        return locationBank;
-    }
-
-    public void setLocationBank(String locationBank) {
-        this.locationBank = locationBank;
-    }
-
     public boolean isMenerimaSampahKertas() {
         return menerimaSampahKertas;
     }
@@ -83,19 +96,19 @@ public class BankSampah {
         this.menerimaSampahPlastik = menerimaSampahPlastik;
     }
 
-    public String getHargaSampahKertas() {
+    public int getHargaSampahKertas() {
         return hargaSampahKertas;
     }
 
-    public void setHargaSampahKertas(String hargaSampahKertas) {
+    public void setHargaSampahKertas(int hargaSampahKertas) {
         this.hargaSampahKertas = hargaSampahKertas;
     }
 
-    public String getHargaSampahPlastik() {
+    public int getHargaSampahPlastik() {
         return hargaSampahPlastik;
     }
 
-    public void setHargaSampahPlastik(String hargaSampahPlastik) {
+    public void setHargaSampahPlastik(int hargaSampahPlastik) {
         this.hargaSampahPlastik = hargaSampahPlastik;
     }
 }

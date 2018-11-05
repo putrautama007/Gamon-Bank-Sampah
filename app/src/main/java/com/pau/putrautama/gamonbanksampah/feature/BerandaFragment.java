@@ -18,9 +18,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.pau.putrautama.gamonbanksampah.R;
+import com.pau.putrautama.gamonbanksampah.model.UserBankSampah;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,6 +64,12 @@ public class BerandaFragment extends Fragment {
         mBtnSave = view.findViewById(R.id.btn_save_sampah);
 
         mAuth = FirebaseAuth.getInstance();
+        mFirebaseUserBankInstance = FirebaseDatabase.getInstance();
+        mFirebaseDatabaseUserBankSampah = mFirebaseUserBankInstance.getReference("userbanksampah");
+
+        retriveHargaItem();
+        checkButtonKertas();
+        checkButtonBotol();
 
         mBtnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +77,7 @@ public class BerandaFragment extends Fragment {
                 customAllertDialog();
             }
         });
+
 
         mCbBotol.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -109,8 +120,8 @@ public class BerandaFragment extends Fragment {
     }
 
     private void updateData(){
-        String hargaKertas = mHargaKertas.getText().toString();
-        String hargaBotol = mHargaBotol.getText().toString();
+        int hargaKertas = Integer.parseInt(mHargaKertas.getText().toString());
+        int hargaBotol = Integer.parseInt(mHargaBotol.getText().toString());
 
         mFirebaseUserBankInstance = FirebaseDatabase.getInstance();
         mFirebaseBankSampahInstance = FirebaseDatabase.getInstance();
@@ -125,11 +136,68 @@ public class BerandaFragment extends Fragment {
         mFirebaseDatabaseUserBankSampah.child(userId).child("hargaSampahPlastik").setValue(hargaBotol);
         mFirebaseDatabaseUserBankSampah.child(userId).child("menerimaSampahPlastik").setValue(isMenerimaBotol);
 
-        mFirebaseDatabaseUserBankSampah.child(userId).child("hargaSampahKertas").setValue(hargaKertas);
-        mFirebaseDatabaseUserBankSampah.child(userId).child("menerimaSampahKertas").setValue(isMenerimaKertas);
-        mFirebaseDatabaseUserBankSampah.child(userId).child("hargaSampahPlastik").setValue(hargaBotol);
-        mFirebaseDatabaseUserBankSampah.child(userId).child("menerimaSampahPlastik").setValue(isMenerimaBotol);
+        mFirebaseDatabaseBankSampah.child(userId).child("hargaSampahKertas").setValue(hargaKertas);
+        mFirebaseDatabaseBankSampah.child(userId).child("menerimaSampahKertas").setValue(isMenerimaKertas);
+        mFirebaseDatabaseBankSampah.child(userId).child("hargaSampahPlastik").setValue(hargaBotol);
+        mFirebaseDatabaseBankSampah.child(userId).child("menerimaSampahPlastik").setValue(isMenerimaBotol);
 
     }
+
+    private void retriveHargaItem(){
+        userId = mAuth.getUid();
+        mFirebaseDatabaseUserBankSampah.child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserBankSampah userBankSampah = dataSnapshot.getValue(UserBankSampah.class);
+                mHargaKertas.setText(String.valueOf(userBankSampah.getHargaSampahKertas()));
+                mHargaBotol.setText(String.valueOf(userBankSampah.getHargaSampahPlastik()));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void checkButtonKertas(){
+        userId = mAuth.getUid();
+        mFirebaseDatabaseUserBankSampah.child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserBankSampah user = dataSnapshot.getValue(UserBankSampah.class);
+                if (user.isMenerimaSampahKertas()){
+                    mCbKertas.setChecked(true);
+                }else {
+                    mCbKertas.setChecked(false);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    private void checkButtonBotol(){
+        userId = mAuth.getUid();
+        mFirebaseDatabaseUserBankSampah.child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserBankSampah user = dataSnapshot.getValue(UserBankSampah.class);
+                if (user.isMenerimaSampahPlastik()){
+                    mCbBotol.setChecked(true);
+                }else {
+                    mCbBotol.setChecked(false);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 }
 
