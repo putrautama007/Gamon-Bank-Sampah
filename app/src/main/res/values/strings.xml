@@ -68,10 +68,11 @@
     <string name="terima">Terima</string>
     <string name="tolak">Tolak</string>
     <string name="tarik_langsung">Tarik Langsung</string>
-    <string name="tabung">Tabung</string>
+    <string name="transaksiLangsungs">Tabung</string>
     <string name="jumlah_kg">Jumlah/kg</string>
     <string name="transaksi_langsung">Transaksi Langsung</string>
     <string name="tarik_saldo">Tarik Saldo</string>
     <string name="ambil_tabungan">Ambil Tabungan</string>
     <string name="edit">EDIT</string>
+    <string name="tabung">Tabung</string>
 </resources>

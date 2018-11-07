@@ -1,21 +1,56 @@
 package com.pau.putrautama.gamonbanksampah.model;
 
 public class UserListTerdaftar {
+    private String idBankSampah;
+    private String idUser;
+    private String namaBank;
     private String namaUser;
     private String tglBergabung;
-    private int totalKertas;
-    private int totalBotol;
-    private int totalSaldo;
+    private int jumlahKertas;
+    private int jumlahBlastik;
+    private int saldo;
 
-    public UserListTerdaftar(String namaUser, String tglBergabung, int totalKertas, int totalBotol, int totalSaldo) {
+
+//    public UserListTerdaftar(String idUser, String namaBank, String namaUser, String tglBergabung,
+//                             int jumlahKertas, int jumlahBlastik, int saldo) {
+//        this.idUser = idUser;
+//        this.namaBank = namaBank;
+//        this.namaUser = namaUser;
+//        this.tglBergabung = tglBergabung;
+//        this.jumlahKertas = jumlahKertas;
+//        this.jumlahBlastik = jumlahBlastik;
+//        this.saldo = saldo;
+//    }
+
+    public UserListTerdaftar(String idBankSampah, String idUser, String namaBank, String namaUser,
+                             String tglBergabung, int jumlahKertas, int jumlahBlastik, int saldo) {
+        this.idBankSampah = idBankSampah;
+        this.idUser = idUser;
+        this.namaBank = namaBank;
         this.namaUser = namaUser;
         this.tglBergabung = tglBergabung;
-        this.totalKertas = totalKertas;
-        this.totalBotol = totalBotol;
-        this.totalSaldo = totalSaldo;
+        this.jumlahKertas = jumlahKertas;
+        this.jumlahBlastik = jumlahBlastik;
+        this.saldo = saldo;
     }
 
     public UserListTerdaftar() {
+    }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getNamaBank() {
+        return namaBank;
+    }
+
+    public void setNamaBank(String namaBank) {
+        this.namaBank = namaBank;
     }
 
     public String getNamaUser() {
@@ -34,27 +69,27 @@ public class UserListTerdaftar {
         this.tglBergabung = tglBergabung;
     }
 
-    public int getTotalKertas() {
-        return totalKertas;
+    public int getJumlahKertas() {
+        return jumlahKertas;
     }
 
-    public void setTotalKertas(int totalKertas) {
-        this.totalKertas = totalKertas;
+    public void setJumlahKertas(int jumlahKertas) {
+        this.jumlahKertas = jumlahKertas;
     }
 
-    public int getTotalBotol() {
-        return totalBotol;
+    public int getJumlahBlastik() {
+        return jumlahBlastik;
     }
 
-    public void setTotalBotol(int totalBotol) {
-        this.totalBotol = totalBotol;
+    public void setJumlahBlastik(int jumlahBlastik) {
+        this.jumlahBlastik = jumlahBlastik;
     }
 
-    public int getTotalSaldo() {
-        return totalSaldo;
+    public int getSaldo() {
+        return saldo;
     }
 
-    public void setTotalSaldo(int totalSaldo) {
-        this.totalSaldo = totalSaldo;
+    public void setSaldo(int saldo) {
+        this.saldo = saldo;
     }
 }

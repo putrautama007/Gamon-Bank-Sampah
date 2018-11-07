@@ -11,8 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.pau.putrautama.gamonbanksampah.R;
 import com.pau.putrautama.gamonbanksampah.adapter.TerdaftarAdapter;
+import com.pau.putrautama.gamonbanksampah.model.UserListMenunggu;
 import com.pau.putrautama.gamonbanksampah.model.UserListTerdaftar;
 
 import java.util.ArrayList;
@@ -25,6 +33,10 @@ public class TerdaftarFragment extends Fragment {
     private RecyclerView mRVTerdaftar;
     private ArrayList<UserListTerdaftar> userListTerdaftars = new ArrayList<>();
     private TerdaftarAdapter adapter;
+    private DatabaseReference mFirebaseDatabase;
+    private FirebaseDatabase mFirebaseInstance;
+    private FirebaseAuth mAuth;
+    private String userId;
 
 
     public TerdaftarFragment() {
@@ -42,20 +54,52 @@ public class TerdaftarFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseDatabase = mFirebaseInstance.getReference("userbanksampah");
 
-        setUpData();
+
+
         mRVTerdaftar = view.findViewById(R.id.rv_terdaftar);
         adapter = new TerdaftarAdapter(getContext(), userListTerdaftars);
         mRVTerdaftar.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRVTerdaftar.setAdapter(adapter);
+        setUpData();
         adapter.notifyDataSetChanged();
     }
 
     private void setUpData() {
-        userListTerdaftars.add(new UserListTerdaftar("John Doe","02 Agustus 2018",
-                6,4,19000));
-        userListTerdaftars.add(new UserListTerdaftar("Amaris Ane","20 September 2018",
-                4,2,11000));
+        userId = mAuth.getUid();
+
+        mFirebaseDatabase.child(userId).child("terdaftar").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                UserListTerdaftar userListTerdaftar = new UserListTerdaftar();
+                userListTerdaftar = dataSnapshot.getValue(UserListTerdaftar.class);
+
+                userListTerdaftars.add(userListTerdaftar);
+                mRVTerdaftar.setAdapter(adapter);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 }

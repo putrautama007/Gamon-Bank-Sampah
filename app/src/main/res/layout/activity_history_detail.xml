@@ -85,6 +85,18 @@
             android:lineSpacingExtra="1.3sp"
             android:text="02 Agustus 2018 | 14:32"
             />
+        <TextView
+            android:id="@+id/tv_detail_id_transaksi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_detail_tgl"
+            android:layout_toEndOf="@+id/iv_detail_riwayat"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:lineSpacingExtra="1.3sp"
+            android:text="transaksi id"/>
     </RelativeLayout>
 
     <android.support.v7.widget.CardView

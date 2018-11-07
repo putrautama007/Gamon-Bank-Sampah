@@ -208,7 +208,7 @@ public class SetupBankSampahActivity extends AppCompatActivity {
                 latitudeMap, longitudeMap,isMenerimaKertas,
                 isMenerimaBotol,0,0);
 
-        bankSampah = new BankSampah(namaUserBank,email,noHp,alamatBank, latitudeMap, longitudeMap,
+        bankSampah = new BankSampah(namaBank,email,noHp,alamatBank, latitudeMap, longitudeMap,
                 isMenerimaKertas,isMenerimaBotol,0,0);
 
         mFirebaseDatabaseUserBankSampah.child(userId).setValue(userBankSampah);
