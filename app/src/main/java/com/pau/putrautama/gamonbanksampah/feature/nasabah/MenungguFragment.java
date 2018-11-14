@@ -62,6 +62,7 @@ public class MenungguFragment extends Fragment {
         mRVMenunggu = view.findViewById(R.id.rv_menunggu);
         adapter = new MenungguAdapter(getContext(), userListMenunggu);
         mRVMenunggu.setLayoutManager(new LinearLayoutManager(getContext()));
+        userListMenunggu.clear();
 //        mRVMenunggu.setAdapter(adapter);
         setUpData();
         adapter.notifyDataSetChanged();
@@ -70,29 +71,16 @@ public class MenungguFragment extends Fragment {
     private void setUpData() {
         userId = mAuth.getUid();
 
-        mFirebaseDatabase.child(userId).child("menunggu").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                UserListMenunggu userListMenunggu1 = new UserListMenunggu();
-                userListMenunggu1 = dataSnapshot.getValue(UserListMenunggu.class);
 
-                userListMenunggu.add(userListMenunggu1);
+
+        mFirebaseDatabase.child(userId).child("menunggu").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot tiapDataSnapshot : dataSnapshot.getChildren()){
+                    UserListMenunggu userListMenunggu1 = tiapDataSnapshot.getValue(UserListMenunggu.class);
+                    userListMenunggu.add(userListMenunggu1);
+                }
                 mRVMenunggu.setAdapter(adapter);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
             }
 
             @Override

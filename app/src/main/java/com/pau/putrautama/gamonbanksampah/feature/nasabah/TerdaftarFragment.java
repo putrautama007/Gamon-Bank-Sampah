@@ -59,7 +59,6 @@ public class TerdaftarFragment extends Fragment {
         mFirebaseDatabase = mFirebaseInstance.getReference("userbanksampah");
 
 
-
         mRVTerdaftar = view.findViewById(R.id.rv_terdaftar);
         adapter = new TerdaftarAdapter(getContext(), userListTerdaftars);
         mRVTerdaftar.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -70,29 +69,14 @@ public class TerdaftarFragment extends Fragment {
     private void setUpData() {
         userId = mAuth.getUid();
 
-        mFirebaseDatabase.child(userId).child("terdaftar").addChildEventListener(new ChildEventListener() {
+        mFirebaseDatabase.child(userId).child("terdaftar").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                UserListTerdaftar userListTerdaftar = new UserListTerdaftar();
-                userListTerdaftar = dataSnapshot.getValue(UserListTerdaftar.class);
-
-                userListTerdaftars.add(userListTerdaftar);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot tiapDataSnapshot : dataSnapshot.getChildren()){
+                    UserListTerdaftar userListTerdaftar = tiapDataSnapshot.getValue(UserListTerdaftar.class);
+                    userListTerdaftars.add(userListTerdaftar);
+                }
                 mRVTerdaftar.setAdapter(adapter);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
             }
 
             @Override

@@ -142,9 +142,7 @@ public class MenungguAdapter extends RecyclerView.Adapter<MenungguAdapter.ViewHo
         mFirebaseDatabaseBankSampah.child(userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               for (DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
-                   namaBank =dataSnapshot1.child("namaBankSampah").getValue().toString();
-               }
+                   namaBank =dataSnapshot.child("namaBankSampah").getValue().toString();
             }
 
             @Override
@@ -155,7 +153,7 @@ public class MenungguAdapter extends RecyclerView.Adapter<MenungguAdapter.ViewHo
 
 
         userListTerdaftars = new UserListTerdaftar(userId,userListMenunggu.get(0).getIdUser(),
-               namaBank,userListMenunggu.get(0).getNamaUser()
+               userListMenunggu.get(0).getNamaBank(),userListMenunggu.get(0).getNamaUser()
                 ,tglBergabung,0,0,0);
 
         mFirebaseDatabaseBankSampah.child(userId).child("terdaftar")
@@ -164,7 +162,7 @@ public class MenungguAdapter extends RecyclerView.Adapter<MenungguAdapter.ViewHo
         mFirebaseDatabaseUser.child(userListMenunggu.get(0).getIdUser()).child("bankSampah")
                 .child(userId).setValue(userListTerdaftars);
 
-        Log.d("user", "setUpData: " +namaBank);
+        Log.d("user", "setUpData: " + userListMenunggu.get(0).getNamaBank());
     }
 
     private void getkey(){

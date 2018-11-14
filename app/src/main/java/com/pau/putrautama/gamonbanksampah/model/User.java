@@ -6,17 +6,28 @@ public class User {
     private String password;
     private String noTlp;
     private int poin;
+    private int saldo;
 
 
-    public User(String namaLengkap, String email, String password, String noTlp, int poin) {
+    public User(String namaLengkap, String email, String password,
+                String noTlp, int poin, int saldo) {
         this.namaLengkap = namaLengkap;
         this.email = email;
         this.password = password;
         this.noTlp = noTlp;
         this.poin = poin;
+        this.saldo = saldo;
     }
 
     public User() {
+    }
+
+    public int getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(int saldo) {
+        this.saldo = saldo;
     }
 
     public String getNamaLengkap() {

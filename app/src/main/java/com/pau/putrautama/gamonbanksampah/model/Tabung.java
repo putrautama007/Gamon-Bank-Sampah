@@ -7,6 +7,7 @@ public class Tabung implements Serializable{
     String namaUser;
     String namaBankSampah;
     String tglTransaksi;
+    String statusTransaksi;
     int beratKertas;
     int hargaKertas;
     int beratBotol;
@@ -16,12 +17,13 @@ public class Tabung implements Serializable{
     int saldo;
 
     public Tabung(String idTransaksi, String namaUser, String namaBankSampah, String tglTransaksi,
-                  int beratKertas, int hargaKertas, int beratBotol, int hargaBotol,
-                  int hargaTotal, int poin, int saldo) {
+                  String statusTransaksi, int beratKertas, int hargaKertas, int beratBotol,
+                  int hargaBotol, int hargaTotal, int poin, int saldo) {
         this.idTransaksi = idTransaksi;
         this.namaUser = namaUser;
         this.namaBankSampah = namaBankSampah;
         this.tglTransaksi = tglTransaksi;
+        this.statusTransaksi = statusTransaksi;
         this.beratKertas = beratKertas;
         this.hargaKertas = hargaKertas;
         this.beratBotol = beratBotol;
@@ -32,6 +34,14 @@ public class Tabung implements Serializable{
     }
 
     public Tabung() {
+    }
+
+    public String getStatusTransaksi() {
+        return statusTransaksi;
+    }
+
+    public void setStatusTransaksi(String statusTransaksi) {
+        this.statusTransaksi = statusTransaksi;
     }
 
     public String getIdTransaksi() {
