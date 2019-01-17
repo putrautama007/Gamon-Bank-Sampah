@@ -229,7 +229,7 @@ public class TarikActivity extends AppCompatActivity {
                         mFirebaseDatabaseBankSampah.child(userId).child("tarikSaldo")
                                 .child(idTransaksi).setValue(tabung);
 
-                        mFirebaseDatabaseUser.child(pelanggangBank).child("bankSampah").child(userId).child("tabung")
+                        mFirebaseDatabaseUser.child(pelanggangBank).child("tabung")
                                 .child(idTransaksi).setValue(tabung);
 
                         mFirebaseDatabaseBankSampah.child(userId).child("terdaftar").child(pelanggangBank).child("saldo").setValue(totalSaldo);

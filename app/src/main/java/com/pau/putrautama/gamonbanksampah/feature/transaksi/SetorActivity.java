@@ -187,7 +187,7 @@ public class SetorActivity extends AppCompatActivity {
         SimpleDateFormat currentDate = new SimpleDateFormat("ddmmmyy");
         saveCurrentDate = currentDate.format(calendar.getTime());
 
-        SimpleDateFormat currentTime = new SimpleDateFormat("HHmm");
+        SimpleDateFormat currentTime = new SimpleDateFormat("HHmmss");
         saveCurrentTime = currentTime.format(calendar.getTime());
 
 
@@ -243,7 +243,7 @@ public class SetorActivity extends AppCompatActivity {
         int hargaKertas = beratKertas * hargaSampahKertas;
         int hargaPlastik = beratBotol * hargaSampahPlastik;
         int totalHarga = hargaKertas + hargaPlastik;
-        int poin = totalHarga/100;
+        int poin = totalHarga/50;
         int totalSaldo = saldo + totalHarga;
         int totalBeratPlastik = beratBotolUser + beratBotol;
         int totalBeratKertas = beratKertasUser + beratKertas;
@@ -269,7 +269,7 @@ public class SetorActivity extends AppCompatActivity {
             mFirebaseDatabaseBankSampah.child(userId).child("tabung")
                     .child(idTransaksi).setValue(tabung);
 
-            mFirebaseDatabaseUser.child(pelanggangBank).child("bankSampah").child(userId).child("tabung")
+            mFirebaseDatabaseUser.child(pelanggangBank).child("tabung")
                     .child(idTransaksi).setValue(tabung);
 
             mFirebaseDatabaseBankSampah.child(userId).child("terdaftar").child(pelanggangBank).child("saldo").setValue(totalSaldo);

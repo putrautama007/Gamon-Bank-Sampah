@@ -192,23 +192,9 @@ public class MenungguAdapter extends RecyclerView.Adapter<MenungguAdapter.ViewHo
         mFirebaseBankSampahInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabaseBankSampah = mFirebaseBankSampahInstance.getReference("userbanksampah");
 
-        Query applesQuery = mFirebaseDatabaseBankSampah.child(userId).child("menunggu").equalTo(nasabahhId);
+        Query menungguQuery = mFirebaseDatabaseBankSampah.child(userId).child("menunggu").equalTo(nasabahhId);
         getkey();
-        applesQuery.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot tiapDataSnapshot:dataSnapshot.getChildren()) {
-                   tiapDataSnapshot.getRef().removeValue();
-                }
-                notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        menungguQuery.getRef().removeValue();
     }
 
 

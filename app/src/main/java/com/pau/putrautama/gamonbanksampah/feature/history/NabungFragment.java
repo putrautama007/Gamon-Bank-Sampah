@@ -11,8 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.pau.putrautama.gamonbanksampah.R;
+import com.pau.putrautama.gamonbanksampah.adapter.TabungAdapter;
 import com.pau.putrautama.gamonbanksampah.adapter.TransaksiLangsungdapter;
+import com.pau.putrautama.gamonbanksampah.model.Tabung;
 import com.pau.putrautama.gamonbanksampah.model.TransaksiLangsung;
 
 import java.util.ArrayList;
@@ -23,9 +31,12 @@ import java.util.ArrayList;
 public class NabungFragment extends Fragment {
 
     private RecyclerView mRVHistory;
-    private ArrayList<TransaksiLangsung> transaksiLangsungs = new ArrayList<>();
-    private TransaksiLangsungdapter adapter;
-
+    private ArrayList<Tabung> tabungs = new ArrayList<>();
+    private TabungAdapter adapter;
+    private DatabaseReference mFirebaseDatabase;
+    private FirebaseDatabase mFirebaseInstance;
+    private FirebaseAuth mAuth;
+    private String userId;
 
     public NabungFragment() {
         // Required empty public constructor
@@ -43,18 +54,37 @@ public class NabungFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        setUpData();
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseDatabase = mFirebaseInstance.getReference("userbanksampah");
+
+        loadData();
         mRVHistory = view.findViewById(R.id.rv_tabung);
-        adapter = new TransaksiLangsungdapter(getContext(), transaksiLangsungs);
+        adapter = new TabungAdapter(getContext(), tabungs);
         mRVHistory.setLayoutManager(new LinearLayoutManager(getContext()));
         mRVHistory.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 
-//    private void setUpData() {
-//        transaksiLangsungs.add(new Tabung("John Doe","Bank Sampah Sumber Jaya",38271,"21 Oktober 2018 | 14:32",
-//                4,2,6000,5000,11000));
-//        transaksiLangsungs.add(new Tabung("John Doe","Bank Sampah Sumber Jaya",38271,"19 Oktober 2018 2018 | 10:32",
-//                2,2,3000,2000,8000));
-//    }
+    private void loadData(){
+        userId = mAuth.getUid();
+        mFirebaseDatabase.child(userId).child("tabung").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot tiapDataSnapshot:dataSnapshot.getChildren()) {
+                    Tabung tabung = tiapDataSnapshot.getValue(Tabung.class);
+                    tabungs.add(tabung);
+                }
+                adapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
 }
